@@ -1,0 +1,40 @@
+<!-- title: Session Recap -->
+<!-- order: 4 -->
+<!-- scripts: recap.js -->
+<p>Jot down what happened while it's fresh. You get a note for your vault and a message ready to paste into Discord.</p>
+
+<p class="note">Fill in as much or as little as you like. Empty boxes are left out. Your campaign name and players are remembered for next time.</p>
+
+<div class="options">
+  <label>Campaign <input id="campaign" placeholder="e.g. The Salt Road"></label>
+  <label>Session <input id="num" type="number" min="1" placeholder="12"></label>
+  <label>Date <input id="date" type="date"></label>
+</div>
+<div class="options">
+  <label class="wide">Who played <input id="players" placeholder="Mara (Ilse), Tom (Brother Wen)"></label>
+</div>
+
+<div class="recap">
+  <label for="happened">What happened</label>
+  <textarea id="happened" placeholder="One thing per line works well."></textarea>
+  <label for="loot">Loot and rewards</label>
+  <textarea id="loot"></textarea>
+  <label for="threads">Threads left open</label>
+  <textarea id="threads" placeholder="Who still owes who, what nobody looked into..."></textarea>
+  <label for="next">Next time</label>
+  <textarea id="next"></textarea>
+  <label for="quote">Line of the night</label>
+  <textarea id="quote" placeholder="&quot;I didn't say it was a good plan.&quot;"></textarea>
+</div>
+
+<div class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-view="md">Vault note</button>
+  <button role="tab" aria-selected="false" data-view="discord">Discord</button>
+</div>
+<pre class="preview recap-out"><code id="out"></code></pre>
+
+<div class="buttons">
+  <button id="copy" class="btn">Copy</button>
+  <button id="download" class="btn quiet">Download note</button>
+  <button id="clear" class="btn quiet">Start a new session</button>
+</div>

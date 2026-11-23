@@ -1,0 +1,32 @@
+<!-- title: File Converter -->
+<!-- order: 1 -->
+<!-- scripts: vendor/mammoth.browser.min.js, vendor/turndown.browser.umd.js, vendor/turndown-plugin-gfm.js, vendor/pdf.min.js, vendor/jszip.min.js, vendor/marked.umd.js, converter.js -->
+<p>Drop in your files and get back clean notes in one format. Everything happens in your browser; nothing is uploaded.</p>
+
+<p class="note">Works with Word (.docx), PDF, Markdown, text and web pages (.html). For a Google Doc, choose <strong>File &gt; Download &gt; Microsoft Word</strong> first.</p>
+
+<label class="drop" id="drop">
+  <input type="file" id="files" multiple accept=".docx,.pdf,.md,.markdown,.txt,.html,.htm">
+  <span class="drop-big">Drop files here</span>
+  <span>or click to choose them</span>
+</label>
+
+<div class="options">
+  <label>Turn them into
+    <select id="format">
+      <option value="md">Markdown notes (for Obsidian or a wiki)</option>
+      <option value="txt">Plain text</option>
+      <option value="html">Web pages</option>
+    </select>
+  </label>
+  <label class="md-only">Tags <input id="tags" placeholder="e.g. lore, places"></label>
+  <label class="md-only">Author <input id="author" placeholder="Your name"></label>
+</div>
+
+<div class="buttons">
+  <button id="go" class="btn" disabled>Convert</button>
+  <button id="zip" class="btn quiet" hidden>Download all as .zip</button>
+</div>
+
+<ul id="results" class="results"></ul>
+<pre id="preview" class="preview" hidden></pre>

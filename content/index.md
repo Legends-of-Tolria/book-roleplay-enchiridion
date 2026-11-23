@@ -9,7 +9,7 @@ updated: 2026-11-23
 
 # The Roleplay Enchiridion
 
-For anyone building a world, writing a story, running a game, playing a character or making art. Each chapter has questions to ask yourself, a few techniques, and the tools of the trade, free ones first.
+For anyone building a world, writing a story, running a game, playing a character or making art. Each chapter has questions to ask yourself, a few techniques, and the tools of the trade (free ones first).
 
 ## Where are you starting?
 

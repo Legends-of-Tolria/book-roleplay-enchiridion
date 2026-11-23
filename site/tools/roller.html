@@ -1,0 +1,23 @@
+<!-- title: Table Roller -->
+<!-- order: 3 -->
+<!-- scripts: roller.js -->
+<p>Paste a list, one entry per line, and roll on it. Your tables stay saved in this browser.</p>
+
+<p class="note">Put dice in curly brackets to roll them inside a result, like <code>{2d6} goblins</code>. To copy a printed table, start lines with their numbers, like <code>1-3 A wolf</code>, and the roller uses the same odds.</p>
+
+<div class="options">
+  <label>Table <select id="saved"></select></label>
+  <label>Name <input id="tname" placeholder="e.g. Road encounters"></label>
+</div>
+
+<textarea id="entries" class="entries" rows="10" spellcheck="false"></textarea>
+
+<div class="buttons">
+  <button id="roll" class="btn">Roll</button>
+  <button id="roll3" class="btn quiet">Roll 3</button>
+  <button id="save" class="btn quiet">Save table</button>
+  <button id="del" class="btn quiet">Delete</button>
+</div>
+
+<div id="result" class="result" aria-live="polite"></div>
+<ol id="history" class="history"></ol>
