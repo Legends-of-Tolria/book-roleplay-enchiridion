@@ -49,7 +49,7 @@
 
   function show(results) {
     if (!results[0]) { $("result").textContent = "Add a few lines to roll on."; return; }
-    $("result").innerHTML = results.map((r) => `<p>${r.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</p>`).join("");
+    $("result").replaceChildren(...results.map((r) => { const p = document.createElement("p"); p.textContent = r; return p; }));
     const h = $("history");
     results.forEach((r) => { const li = document.createElement("li"); li.textContent = r; h.prepend(li); });
     while (h.children.length > 12) h.lastChild.remove();
@@ -57,7 +57,7 @@
 
   function fill(selected) {
     const names = Object.keys(tables);
-    $("saved").innerHTML = `<option value="">New table</option>` + names.map((n) => `<option>${n.replace(/</g, "&lt;")}</option>`).join("");
+    $("saved").replaceChildren(new Option("New table", ""), ...names.map((n) => new Option(n, n)));
     $("saved").value = selected && tables[selected] !== undefined ? selected : "";
   }
 

@@ -234,9 +234,9 @@
 
     replacement: function (content, node) {
       var href = node.getAttribute('href');
-      if (href) href = href.replace(/([()])/g, '\\$1');
+      if (href) href = href.replace(/([\\()])/g, '\\$1'); // patched: escape backslashes too
       var title = cleanAttribute(node.getAttribute('title'));
-      if (title) title = ' "' + title.replace(/"/g, '\\"') + '"';
+      if (title) title = ' "' + title.replace(/(["\\])/g, '\\$1') + '"'; // patched: escape backslashes too
       return '[' + content + '](' + href + title + ')'
     }
   };

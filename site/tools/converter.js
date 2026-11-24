@@ -21,7 +21,7 @@
         const first = t.querySelector("tr");
         first && first.querySelectorAll("td").forEach((td) => {
           const th = doc.createElement("th");
-          th.innerHTML = td.innerHTML;
+          th.append(...td.childNodes);
           td.replaceWith(th);
         });
       }
@@ -101,7 +101,7 @@
   function asMarkdownNote(title, body) {
     const tags = $("tags").value.split(",").map((t) => t.trim()).filter(Boolean);
     const author = $("author").value.trim();
-    const q = (s) => `"${s.replace(/"/g, '\\"')}"`;
+    const q = (s) => `"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\r?\n/g, " ")}"`;
     const front = [
       "---",
       `title: ${q(title)}`,
@@ -122,8 +122,8 @@
   }
 
   function asText(body) {
-    const div = document.createElement("div");
-    div.innerHTML = marked.parse(body);
+    // Parse into a separate, inert document so nothing in the file can run.
+    const div = new DOMParser().parseFromString(marked.parse(body), "text/html").body;
     div.querySelectorAll("p, h1, h2, h3, h4, li, tr, pre, blockquote").forEach((n) => n.append("\n"));
     div.querySelectorAll("li").forEach((n) => n.prepend("- "));
     return div.textContent.replace(/\n{3,}/g, "\n\n").trim() + "\n";
@@ -140,7 +140,15 @@
   function pick(list) {
     picked = [...list];
     done = [];
-    results.innerHTML = picked.map((f) => `<li><span>${f.name}</span><em>ready</em></li>`).join("");
+    results.replaceChildren(...picked.map((f) => {
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      const em = document.createElement("em");
+      span.textContent = f.name;
+      em.textContent = "ready";
+      li.append(span, em);
+      return li;
+    }));
     go.disabled = !picked.length;
     zipBtn.hidden = true;
     preview.hidden = true;
@@ -177,8 +185,11 @@
         name += "." + kind;
         done.push({ name, out });
         row.className = "good";
-        row.querySelector("em").innerHTML = `<button class="link">Download ${name}</button>`;
-        row.querySelector("button").addEventListener("click", () => download(name, out));
+        const btn = document.createElement("button");
+        btn.className = "link";
+        btn.textContent = `Download ${name}`;
+        btn.addEventListener("click", () => download(name, out));
+        row.querySelector("em").replaceChildren(btn);
         if (done.length === 1) { preview.textContent = out.slice(0, 4000); preview.hidden = false; }
       } catch (err) {
         console.error(err);
